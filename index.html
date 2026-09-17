@@ -564,10 +564,174 @@
     .tt-c.now{animation:none!important}
   }
 
+  /* ============================================================
+     PHONE SHELL — 整頁是一支手機，底部切換畫面
+     ============================================================ */
+  .phone{
+    width:min(430px,94vw);height:min(900px,90vh);margin:0 auto;
+    display:flex;flex-direction:column;position:relative;overflow:hidden;
+    border:1px solid var(--line);border-radius:34px;background:var(--panel);
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    box-shadow:0 0 0 1px var(--line-soft),0 24px 70px rgba(0,0,0,.55),var(--vign);
+  }
+  .phone::before{                     /* 動態島 */
+    content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);
+    width:92px;height:21px;border-radius:12px;background:var(--strip);
+    border:1px solid var(--line-soft);z-index:3;pointer-events:none;
+  }
+  .ph-bar{
+    position:relative;z-index:4;flex:0 0 auto;display:flex;align-items:center;gap:8px;
+    padding:15px 16px 9px;border-bottom:1px solid var(--line);
+    font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.14em;
+    color:var(--muted);text-transform:uppercase;
+  }
+  .ph-clock{color:var(--accent)}
+  .ph-node{margin-left:auto;margin-right:8px;color:var(--accent-2);opacity:.9}
+  .ph-bar .thm{gap:0}
+  .ph-bar .thm-b{padding:3px 6px;font-size:8.5px;border-radius:6px;letter-spacing:.1em}
+  .ph-bar .snd{padding:3px 7px;font-size:8.5px}
+  .ph-sig{color:var(--accent);opacity:.85;letter-spacing:.05em}
+
+  .ph-screens{flex:1 1 auto;min-height:0;position:relative}
+  .screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:20px 16px 30px}
+  .screen[hidden]{display:none}
+  .screen{scrollbar-width:thin;scrollbar-color:var(--scroll-thumb-c) transparent}
+  .screen::-webkit-scrollbar{width:7px}
+  .screen::-webkit-scrollbar-thumb{background:var(--scroll-thumb-bg);border-radius:4px}
+  .screen::-webkit-scrollbar-track{background:var(--line-soft)}
+
+  .phone-nav{
+    flex:0 0 auto;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;
+    padding:9px 12px;border-top:1px solid var(--line);background:var(--panel-solid);
+  }
+  .phone-nav::-webkit-scrollbar{display:none}
+  .pnav{
+    flex:0 0 auto;font-family:'Share Tech Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+    padding:7px 11px;border-radius:999px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;
+    transition:color .2s,border-color .2s,background .2s;
+  }
+  .pnav:hover{color:var(--accent);border-color:var(--accent)}
+  .pnav[aria-current="true"]{background:var(--act-bg);border-color:var(--act-border);color:var(--act-fg)}
+  .pnav:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+  /* 手機內的排版：標題縮小、改成單欄，430px 才讀得下 */
+  .phone .hero{padding:6px 0 14px}
+  .phone .brand{font-size:clamp(30px,8.4vw,42px);gap:11px}
+  .phone .logo-orb{width:36px;height:36px}
+  .phone .brand-strip .sub{font-size:11px}
+  .phone .hero p.tag{margin-top:14px;font-size:12.5px;line-height:1.78;max-width:none}
+  .phone .sect{margin:28px 0 14px;gap:11px}
+  .phone .sect .bar{width:6px;height:22px}
+  .phone .sect h2{font-size:15px;letter-spacing:.08em}
+  .phone .sect .idx{font-size:9px;letter-spacing:.16em}
+  .phone .stats{grid-template-columns:repeat(2,1fr);gap:9px}
+  .phone .stat{padding:13px 13px 12px}
+  .phone .stat .v{font-size:30px;margin:6px 0 3px}
+  .phone .stat .k{font-size:9.5px}
+  .phone .stat .u{font-size:9px}
+  .phone .cards{grid-template-columns:1fr;gap:11px}
+  .phone .card{padding:15px}
+  .phone .card .cname{font-size:19px}
+  .card .cx{margin-top:11px;font-family:'Share Tech Mono';font-size:9.5px;letter-spacing:.16em;color:var(--accent)}
+  .card:hover .cx,.tt-c:hover .cn{color:var(--accent)}
+  .tt-c[data-goto] .cn::after{content:" \25B8";opacity:.7}
+  .phone .ttscroll{margin:0 -16px;padding:10px 16px 12px;border-radius:0;border-left:0;border-right:0}
+  .phone .legend{font-size:9px;gap:7px 12px}
+  .phone footer{margin-top:34px;padding-top:18px;font-size:10px}
+  .tt-c[data-goto],.card[data-goto]{cursor:pointer}
+  .tt-c:focus-visible,.card:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+  /* ============================================================
+     課程計畫畫面
+     ============================================================ */
+  .cs-head{border-bottom:1px solid var(--line);padding-bottom:16px}
+  .cs-code{font-family:'Share Tech Mono';font-size:9.5px;letter-spacing:.24em;color:var(--accent-2);text-transform:uppercase}
+  .cs-name{font-family:'Anton';text-transform:uppercase;font-size:clamp(21px,5.6vw,28px);line-height:1.22;color:var(--fg);margin:9px 0 12px}
+  .cs-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .cs-chips span,.oc-assess span{
+    font-family:'Share Tech Mono';font-size:9px;letter-spacing:.14em;padding:4px 9px;
+    border:1px solid var(--line);border-radius:999px;color:var(--accent);
+  }
+  .cs-where{margin-top:12px;font-family:'Share Tech Mono';font-size:10px;letter-spacing:.1em;color:var(--muted);line-height:1.9}
+
+  .fgrid{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .fitem{display:flex;gap:10px;align-items:baseline;padding:10px 12px;background:var(--panel);border-bottom:1px solid var(--line-soft)}
+  .fitem:last-child{border-bottom:0}
+  .fk{flex:0 0 78px;font-family:'Share Tech Mono';font-size:9px;letter-spacing:.12em;color:var(--muted-2);text-transform:uppercase;line-height:1.7}
+  .fv{flex:1 1 auto;min-width:0;font-family:'Chakra Petch';font-size:12.5px;line-height:1.65;color:var(--fg);word-break:break-word}
+
+  .cs-list,.cs-goals,.oc-crit{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+  .cs-list li,.cs-goals li,.oc-crit li{position:relative;padding-left:15px;font-size:12.5px;line-height:1.75;color:var(--muted)}
+  .cs-list li::before,.cs-goals li::before,.oc-crit li::before{
+    content:"";position:absolute;left:0;top:9px;width:7px;height:1px;background:var(--accent);
+  }
+  .cs-list li,.cs-goals li{color:var(--fg);opacity:.86}
+  .cs-list li i{font-style:normal;color:var(--accent)}
+  .cs-p{margin:0;font-size:12.5px;line-height:1.85;color:var(--muted)}
+
+  .oc{display:flex;flex-direction:column;gap:10px}
+  .oc-row{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:13px 14px}
+  .oc-top{display:flex;align-items:baseline;gap:8px;margin-bottom:9px}
+  .oc-school{font-family:'Anton';text-transform:uppercase;font-size:15px;letter-spacing:.04em;color:var(--fg)}
+  .oc-w{margin-left:auto;font-family:'Share Tech Mono';font-size:12px;color:var(--accent)}
+  .oc-dept{font-size:12px;line-height:1.72;color:var(--accent);padding-bottom:9px;margin-bottom:10px;border-bottom:1px dashed var(--line-soft)}
+  .oc-assess{margin-top:11px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;
+    font-family:'Share Tech Mono';font-size:9px;letter-spacing:.1em;color:var(--muted-2)}
+
+  .wk{display:flex;flex-direction:column}
+  .wk-row{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--line-soft)}
+  .wk-row:last-child{border-bottom:0}
+  .wk-n{
+    flex:0 0 30px;height:30px;border:1px solid var(--line);border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Share Tech Mono';font-size:11px;color:var(--accent);
+  }
+  .wk-b{flex:1 1 auto;min-width:0}
+  .wk-d{font-family:'Share Tech Mono';font-size:9px;letter-spacing:.14em;color:var(--muted-2)}
+  .wk-c{font-size:12.5px;line-height:1.7;color:var(--fg);margin:4px 0 6px}
+  .wk-t{display:flex;flex-wrap:wrap;gap:5px}
+  .wk-t span{
+    font-family:'Share Tech Mono';font-size:8.5px;letter-spacing:.08em;padding:2px 7px;
+    border:1px solid var(--line-soft);border-radius:5px;color:var(--muted);
+  }
+  .wk-t span b{color:var(--accent);font-weight:400}
+  .wk-row.rest .wk-n{border-style:dashed;color:var(--muted-2)}
+  .wk-row.rest .wk-c{color:var(--muted-2)}
+
+  .bk{display:flex;flex-direction:column;gap:9px}
+  .bk-i{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:12px 13px}
+  .bk-t{font-family:'Chakra Petch';font-weight:700;font-size:13.5px;line-height:1.5;color:var(--fg)}
+  .bk-m{margin-top:7px;font-family:'Share Tech Mono';font-size:9px;letter-spacing:.06em;color:var(--muted);line-height:1.9;word-break:break-word}
+
+  .cs-link{
+    display:flex;align-items:center;gap:9px;margin-top:28px;padding:13px 15px;
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);
+    font-family:'Share Tech Mono';font-size:10.5px;letter-spacing:.14em;color:var(--accent);
+    text-decoration:none;cursor:pointer;text-transform:uppercase;transition:border-color .2s,box-shadow .2s;
+  }
+  .cs-link:hover{border-color:var(--accent);box-shadow:var(--act-shadow)}
+  .law-sec{display:flex;flex-direction:column;gap:12px}
+  .law-sec p{margin:0;font-size:12.5px;line-height:1.95;color:var(--muted)}
+  .law-sec p b{color:var(--accent);font-weight:500}
+
+  /* 視窗小於 520px：拿掉外框，手機全出血 */
+  @media(max-width:519px){
+    .wrap{padding:0}
+    .ticker,.vstrip{display:none}
+    .phone{width:100%;height:100vh;height:100dvh;border:0;border-radius:0}
+    .phone::before{display:none}
+    .phone-nav{padding-bottom:calc(9px + env(safe-area-inset-bottom,0px))}
+    .phone footer{display:none}
+  }
+
   @media print{
-    .bg,.grid,.noise,.scanlines,.vignette,.vstrip,.ticker,#cur,#prog,.boot,.topbar,.sect .idx{display:none!important}
+    .bg,.grid,.noise,.scanlines,.vignette,.vstrip,.ticker,#cur,#prog,.boot,.topbar,.phone-nav,.ph-bar,.sect .idx{display:none!important}
     body{background:#fff;color:#000}
     .wrap{padding:0}
+    .phone{width:auto;height:auto;border:0;border-radius:0;box-shadow:none;display:block}
+    .ph-screens{display:block}
+    .screen{position:static;overflow:visible;padding:0}
   }
 </style>
 </head>
@@ -608,12 +772,11 @@
 
   <div class="wrap">
 
-    <div class="topbar">
-      <div class="left">
-        <span class="pulse"></span>
-        <span>1151 // 課表節點</span>
-      </div>
-      <div class="right">
+    <div class="phone" id="phone">
+
+      <div class="ph-bar">
+        <span class="ph-clock" id="phClock">08:10</span>
+        <span class="ph-node">1151 // 課表節點</span>
         <div class="thm" role="group" aria-label="Colour mode">
           <button type="button" class="thm-b" data-theme="ultra" aria-pressed="true">Ultra</button>
           <button type="button" class="thm-b" data-theme="light" aria-pressed="false">White</button>
@@ -622,10 +785,12 @@
         <button class="snd" id="snd" aria-pressed="false" title="Toggle sound">
           <span id="sndTx">SND:OFF</span>
         </button>
-        <span style="opacity:.4">|</span>
-        <span>1151 學年期</span>
+        <span class="ph-sig" aria-hidden="true">&#9646;&#9646;&#9646;</span>
       </div>
-    </div>
+
+      <div class="ph-screens" id="screens">
+
+      <section class="screen" id="timetable">
 
     <header class="hero">
       <div class="eyebrow rv" style="--d:.04s">// 1151 學年期 &middot; 功課表 //</div>
@@ -688,10 +853,1253 @@
       <p>導師晤談時間<b>不是上課</b>，是導師提供一個空堂的時段。同學如果有生活上的事情想與導師聊聊，可於此時間自由前往 <b>電學511</b>（劉宏煥老師）。本學期排定於<b>週一 12:10&ndash;14:00</b>。</p>
     </div>
 
-    <footer class="rv" style="--d:.1s">
+      </section><!-- /timetable -->
+
+<section class="screen" id="c-01" hidden>
+<div class="cs-head">
+<div class="cs-code">C-01 &middot; EL520G</div>
+<h2 class="cs-name">基礎半導體物理與元件(一)</h2>
+<div class="cs-chips"><span>3 學分</span><span>選修</span><span>半學年</span><span>一般</span><span>中文</span></div>
+<div class="cs-where">週四 &nbsp;2·3·4 節 &nbsp;/&nbsp; 09:10–12:00<br>真知教學大樓 教學608 &middot; 武義</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>基本資料</h2><span class="idx">COURSE DATA</span></div>
+<div class="fgrid">
+<div class="fitem"><span class="fk">授課教師</span><span class="fv">武義</span></div>
+<div class="fitem"><span class="fk">開課班級</span><span class="fv">電子三甲</span></div>
+<div class="fitem"><span class="fk">學分</span><span class="fv">3</span></div>
+<div class="fitem"><span class="fk">必選修</span><span class="fv">選修</span></div>
+<div class="fitem"><span class="fk">學年別</span><span class="fv">半學年</span></div>
+<div class="fitem"><span class="fk">性質</span><span class="fv">一般</span></div>
+<div class="fitem"><span class="fk">語言</span><span class="fv">中文</span></div>
+<div class="fitem"><span class="fk">人數上限</span><span class="fv">60</span></div>
+<div class="fitem"><span class="fk">開課時數</span><span class="fv">3.0</span></div>
+<div class="fitem"><span class="fk">上課時地</span><span class="fv">教學608/4-234</span></div>
+<div class="fitem"><span class="fk">辦公室時間</span><span class="fv">4-56</span></div>
+<div class="fitem"><span class="fk">電子郵件</span><span class="fv">wuyih@cycu.edu.tw</span></div>
+</div>
+<div class="sect"><span class="bar"></span><h2>核心能力指標</h2><span class="idx">CORE ABILITIES</span></div>
+<ul class="cs-list"><li>3.1 運用數學、科學及工程知識的能力</li><li>3.3 執行工程實務所需技術、技巧及使用現代工具的能力</li><li>3.4 設計工程系統、元件或製程的能力</li><li>3.7 認識時事議題，瞭解工程技術對環境永續、社會共好及全球發展的影響，並培養持續學習的習慣及能力</li></ul>
+<div class="sect"><span class="bar"></span><h2>教學目標</h2><span class="idx">OBJECTIVES</span></div>
+<p class="cs-p">使修課學生了解半導體基本特性，載子傳輸及各類半導體元件結構及特性。</p>
+<div class="sect"><span class="bar"></span><h2>成果導向之課程設計</h2><span class="idx">OUTCOME-BASED</span></div>
+<div class="oc">
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">專業</span><span class="oc-w">30%</span></div>
+<div class="oc-dept">3.1 運用數學、科學及工程知識的能力</div>
+<ul class="oc-crit"><li>能用所學的專業知識解答相關問題。</li><li>能分析專業科目之間的關聯性。</li><li>能將專業知識融會貫通，統合成完整的知識。</li></ul>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">實務</span><span class="oc-w">20%</span></div>
+<div class="oc-dept">3.3 執行工程實務所需技術、技巧及使用現代工具的能力</div>
+<ul class="oc-crit"><li>能累積從工作或生活中所獲得的新經驗。</li><li>能從工作或生活中獲得新的經驗或體驗。</li><li>能從工作或生活中累積的經驗中再學習。</li></ul>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">統整</span><span class="oc-w">20%</span></div>
+<div class="oc-dept">3.4 設計工程系統、元件或製程的能力</div>
+<ul class="oc-crit"><li>能以淺顯易懂的方式理解複雜的事物。</li><li>能從零散或片段的事物中找出共同點。</li><li>能運用所學，形成一套屬於自己的見解。</li></ul>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">關懷</span><span class="oc-w">30%</span></div>
+<div class="oc-dept">3.7 認識時事議題，瞭解工程技術對環境永續、社會共好及全球發展的影響，並培養持續學習的習慣及能力</div>
+<ul class="oc-crit"><li>能探索自我的生命價值，促進自我成長。</li><li>能規劃自己的人生目標並開展生涯願景。</li><li>能不斷探索自我的優缺點，並加以改善。</li></ul>
+</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>課程綱要及進度</h2><span class="idx">18 WEEKS</span></div>
+<div class="wk">
+<div class="wk-row">
+<div class="wk-n">01</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-17</div>
+<div class="wk-c">Introduction to semiconductors</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Homework</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">02</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-24</div>
+<div class="wk-c">Semiconductor lattices and structures</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Test, Homework,Exercise</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">03</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-01</div>
+<div class="wk-c">Semiconductor lattices and structures</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Quiz, Homework</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">04</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-08</div>
+<div class="wk-c">Energy bands and carrier concentrations</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Quiz, Homework</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">05</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-15</div>
+<div class="wk-c">Energy bands and carrier concentrations</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Quiz, Homework</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">06</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-22</div>
+<div class="wk-c">Carrier transport</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Quiz, Homework</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">07</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-29</div>
+<div class="wk-c">Carrier transport</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Homework,Exercise</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">08</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-05</div>
+<div class="wk-c">Review</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Homework</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">09</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-12</div>
+<div class="wk-c">Midterm examination</div>
+<div class="wk-t"></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">10</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-19</div>
+<div class="wk-c">P-N junctions</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Quiz, Homework,Exercise</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">11</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-26</div>
+<div class="wk-c">P-N junctions</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Quiz, Homework,Exercise</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">12</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-03</div>
+<div class="wk-c">P-N junctions</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Quiz, Homework,Exercise</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">13</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-10</div>
+<div class="wk-c">Ohmic contacts</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Quiz, Homework,Exercise</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">14</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-17</div>
+<div class="wk-c">Ohmic/Schottky contacts</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Quiz, Homework,Exercise</span></div>
+</div></div>
+<div class="wk-row rest">
+<div class="wk-n">15</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-24</div>
+<div class="wk-c">(行憲紀念日放假)</div>
+<div class="wk-t"></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">16</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-31</div>
+<div class="wk-c">Schottky contacts</div>
+<div class="wk-t"><span><b>教學法</b> Teaching with blackboard and powerpoint</span><span><b>評量</b> Quiz, Homework,Exercise</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">17</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-07</div>
+<div class="wk-c">Flexible Teaching Week</div>
+<div class="wk-t"><span><b>教學法</b> Self-learning with AI</span><span><b>評量</b> Homework</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">18</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-14</div>
+<div class="wk-c">Flexible Teaching Week</div>
+<div class="wk-t"><span><b>教學法</b> Self-learning with AI</span><span><b>評量</b> Final examination</span></div>
+</div></div>
+</div>
+<div class="sect"><span class="bar"></span><h2>考核項目及評量標準</h2><span class="idx">ASSESSMENT</span></div>
+<div class="mbar"><div class="lbl"><span>平時 &amp;middot; 作業與測驗</span><em>10%</em></div><div class="trk"><div class="fill" style="width:10%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>期中 &amp;middot; 測驗</span><em>33%</em></div><div class="trk"><div class="fill" style="width:33%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>期末 &amp;middot; 測驗</span><em>37%</em></div><div class="trk"><div class="fill" style="width:37%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>其它 &amp;middot; 正規化調分</span><em>20%</em></div><div class="trk"><div class="fill" style="width:20%"></div></div></div>
+<div class="sect"><span class="bar"></span><h2>教科書 / 參考書</h2><span class="idx">TEXTBOOKS</span></div>
+<div class="bk">
+<div class="bk-i"><div class="bk-t">Semiconductor Devices Physics and Technology</div><div class="bk-m">and M. K.Lee · 2012 · Wiley · ISBN 0470-53794-7 · 3rd Ed.<br><b>教科書</b></div></div>
+</div>
+<a class="cs-link" href="#law" data-goto="law">&#9656; 學則規範 &middot; COURSE RULES</a>
+</section>
+
+<section class="screen" id="c-02" hidden>
+<div class="cs-head">
+<div class="cs-code">C-02 &middot; EL214G</div>
+<h2 class="cs-name">電磁學(一)</h2>
+<div class="cs-chips"><span>3 學分</span><span>必修</span><span>半學年</span><span>一般</span><span>中文</span></div>
+<div class="cs-where">週五 &nbsp;3·4·B 節 &nbsp;/&nbsp; 10:10–13:00<br>真知教學大樓 教學605 &middot; 康振方</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>基本資料</h2><span class="idx">COURSE DATA</span></div>
+<div class="fgrid">
+<div class="fitem"><span class="fk">授課教師</span><span class="fv">康振方</span></div>
+<div class="fitem"><span class="fk">開課班級</span><span class="fv">電子三甲</span></div>
+<div class="fitem"><span class="fk">學分</span><span class="fv">3</span></div>
+<div class="fitem"><span class="fk">必選修</span><span class="fv">必修</span></div>
+<div class="fitem"><span class="fk">學年別</span><span class="fv">半學年</span></div>
+<div class="fitem"><span class="fk">性質</span><span class="fv">一般</span></div>
+<div class="fitem"><span class="fk">語言</span><span class="fv">中文</span></div>
+<div class="fitem"><span class="fk">人數上限</span><span class="fv">119</span></div>
+<div class="fitem"><span class="fk">開課時數</span><span class="fv">3.0</span></div>
+<div class="fitem"><span class="fk">上課時地</span><span class="fv">教學605/5-34B</span></div>
+<div class="fitem"><span class="fk">教學助理</span><span class="fv">潘冠宇</span></div>
+<div class="fitem"><span class="fk">辦公室時間</span><span class="fv">星期四 13:00 ~ 16:00</span></div>
+<div class="fitem"><span class="fk">電子郵件</span><span class="fv">CFKang@cycu.edu.tw</span></div>
+<div class="fitem"><span class="fk">學術比例</span><span class="fv">80</span></div>
+<div class="fitem"><span class="fk">實務比例</span><span class="fv">20</span></div>
+<div class="fitem"><span class="fk">課程類別</span><span class="fv">&lt;翻轉教學&gt;</span></div>
+<div class="fitem"><span class="fk">SDGs</span><span class="fv">1:消除貧窮, 5:性別平等, 4:優質教育,</span></div>
+</div>
+<div class="sect"><span class="bar"></span><h2>核心能力指標</h2><span class="idx">CORE ABILITIES</span></div>
+<ul class="cs-list"><li>3.1 運用數學、科學及工程知識的能力</li><li>3.2 設計與執行實驗，以及分析與解釋數據的能力</li><li>3.6 發掘、分析、應用研究成果及兼顧永續發展，以解決複雜且整合性工程問題的能力</li><li>3.7 認識時事議題，瞭解工程技術對環境永續、社會共好及全球發展的影響，並培養持續學習的習慣及能力</li><li>3.8 理解及應用專業與資訊倫理，認知社會責任及尊重多元觀點</li></ul>
+<div class="sect"><span class="bar"></span><h2>教學目標</h2><span class="idx">OBJECTIVES</span></div>
+<p class="cs-p">這門課程除了介紹電磁學基本知識，還介紹一些可用於解決問題的數學工具; 我們會初習向量微積分，並解釋如何使用場來形象化我們所涉及的主題。課程的內容會在前面的基礎上不斷的發展，並對每種解法進行各種解釋。起初會由簡單的靜電概念開始討論，並將其應用在探索材料中分子間的作用力和電容的性質。接著會將電磁學與更多一般的研究課題關聯起來，並將其應用到與能量存儲和收集有關的特定課題中。</p>
+<div class="sect"><span class="bar"></span><h2>成果導向之課程設計</h2><span class="idx">OUTCOME-BASED</span></div>
+<div class="oc">
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">專業</span><span class="oc-w">50%</span></div>
+<div class="oc-dept">3.1 運用數學、科學及工程知識的能力</div>
+<ul class="oc-crit"><li>能分析專業科目之間的關聯性。</li><li>能將專業知識融會貫通，統合成完整的知識。</li><li>能用所學的專業知識解答相關問題。</li></ul>
+<div class="oc-assess">評量 <span>作業</span><span>期中考</span><span>期末考</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">統整</span><span class="oc-w">10%</span></div>
+<div class="oc-dept">3.2 設計與執行實驗，以及分析與解釋數據的能力</div>
+<ul class="oc-crit"><li>能以淺顯易懂的方式理解複雜的事物。</li><li>能從零散或片段的事物中找出共同點。</li><li>能運用所學，形成一套屬於自己的見解。</li></ul>
+<div class="oc-assess">評量 <span>作業</span><span>期中考</span><span>期末考</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">創新</span><span class="oc-w">10%</span></div>
+<div class="oc-dept">3.6 發掘、分析、應用研究成果及兼顧永續發展，以解決複雜且整合性工程問題的能力</div>
+<ul class="oc-crit"><li>能提出新的想法或觀念。</li><li>能將自己既有的觀念加上新思維。</li><li>能突破既有的思維或觀念。</li><li>能在所學領域上創造新局面。</li></ul>
+<div class="oc-assess">評量 <span>作業</span><span>期中考</span><span>期末考</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">關懷</span><span class="oc-w">10%</span></div>
+<div class="oc-dept">3.7 認識時事議題，瞭解工程技術對環境永續、社會共好及全球發展的影響，並培養持續學習的習慣及能力</div>
+<ul class="oc-crit"><li>能規劃自己的人生目標並開展生涯願景。</li></ul>
+<div class="oc-assess">評量 <span>作業</span><span>期中考</span><span>期末考</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">倫理</span><span class="oc-w">20%</span></div>
+<div class="oc-dept">3.8 理解及應用專業與資訊倫理，認知社會責任及尊重多元觀點</div>
+<ul class="oc-crit"><li>能養成合宜的價值觀。</li><li>能明辨是非善惡。</li></ul>
+<div class="oc-assess">評量 <span>作業</span><span>期中考</span><span>期末考</span></div>
+</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>課程綱要及進度</h2><span class="idx">18 WEEKS</span></div>
+<div class="wk">
+<div class="wk-row">
+<div class="wk-n">01</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-18</div>
+<div class="wk-c">課程介紹</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">02</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-25</div>
+<div class="wk-c">第二章向量分析</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">03</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-02</div>
+<div class="wk-c">第二章 向量分析:微分與積分形式</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">04</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-09</div>
+<div class="wk-c">第二章 向量分析:曲線座標、向量場散度與旋度</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">05</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-16</div>
+<div class="wk-c">第二章 向量分析:斯托克定理</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">06</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-23</div>
+<div class="wk-c">第三章 靜電場:庫侖定律</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">07</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-30</div>
+<div class="wk-c">第三章 靜電場:高斯定律</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">08</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-06</div>
+<div class="wk-c">第三章 靜電場:電位</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答,測驗</span></div>
+</div></div>
+<div class="wk-row rest">
+<div class="wk-n">09</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-13</div>
+<div class="wk-c">(期中考試週)</div>
+<div class="wk-t"><span><b>教學法</b> 期中考</span><span><b>評量</b> 測驗</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">10</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-20</div>
+<div class="wk-c">第三章 靜電場:導體與介電質</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">11</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-27</div>
+<div class="wk-c">第三章 靜電場:偏極與電位移</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">12</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-04</div>
+<div class="wk-c">第三章 靜電場:電容、功與能量</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">13</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-11</div>
+<div class="wk-c">第四章 靜電場問題:帕松及拉普拉斯方程</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">14</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-18</div>
+<div class="wk-c">第四章 靜電場問題:鏡像法I</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">15</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-25</div>
+<div class="wk-c">第四章 靜電場問題:鏡像法II</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">16</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-01</div>
+<div class="wk-c">第四章 靜電場問題:直交座標的邊界問題</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">17</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-08</div>
+<div class="wk-c">第四章 靜電場問題:曲線座標的邊界問題</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授</span><span><b>評量</b> 問答,測驗</span></div>
+</div></div>
+<div class="wk-row rest">
+<div class="wk-n">18</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-15</div>
+<div class="wk-c">(學期考試週)</div>
+<div class="wk-t"><span><b>教學法</b> 期末考</span><span><b>評量</b> 測驗</span></div>
+</div></div>
+</div>
+<div class="sect"><span class="bar"></span><h2>考核項目及評量標準</h2><span class="idx">ASSESSMENT</span></div>
+<div class="mbar"><div class="lbl"><span>平時 &amp;middot; 作業</span><em>30%</em></div><div class="trk"><div class="fill" style="width:30%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>期中 &amp;middot; 期中考</span><em>30%</em></div><div class="trk"><div class="fill" style="width:30%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>期末 &amp;middot; 期末考</span><em>40%</em></div><div class="trk"><div class="fill" style="width:40%"></div></div></div>
+<div class="sect"><span class="bar"></span><h2>教科書 / 參考書</h2><span class="idx">TEXTBOOKS</span></div>
+<div class="bk">
+<div class="bk-i"><div class="bk-t">Introduction to electrodynamics</div><div class="bk-m">Griffiths,David J.(David Jeffery),1942- · 2017 · Cambridge :Cambridge University Press · ISBN 1108420419 · Fou rth edit ion<br><b>教科書</b></div></div>
+</div>
+<a class="cs-link" href="#law" data-goto="law">&#9656; 學則規範 &middot; COURSE RULES</a>
+</section>
+
+<section class="screen" id="c-03" hidden>
+<div class="cs-head">
+<div class="cs-code">C-03 &middot; EL339G</div>
+<h2 class="cs-name">電子系統實驗</h2>
+<div class="cs-chips"><span>1 學分</span><span>必修</span><span>半學年</span><span>一般</span><span>中文</span></div>
+<div class="cs-where">週一 &nbsp;5·6·7 節 &nbsp;/&nbsp; 13:10–16:00<br>電學大樓 電學410 &middot; 陳聖文</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>基本資料</h2><span class="idx">COURSE DATA</span></div>
+<div class="fgrid">
+<div class="fitem"><span class="fk">授課教師</span><span class="fv">陳聖文</span></div>
+<div class="fitem"><span class="fk">開課班級</span><span class="fv">電子三甲</span></div>
+<div class="fitem"><span class="fk">學分</span><span class="fv">1</span></div>
+<div class="fitem"><span class="fk">必選修</span><span class="fv">必修</span></div>
+<div class="fitem"><span class="fk">學年別</span><span class="fv">半學年</span></div>
+<div class="fitem"><span class="fk">性質</span><span class="fv">一般</span></div>
+<div class="fitem"><span class="fk">語言</span><span class="fv">中文</span></div>
+<div class="fitem"><span class="fk">人數上限</span><span class="fv">60</span></div>
+<div class="fitem"><span class="fk">開課時數</span><span class="fv">3.0</span></div>
+<div class="fitem"><span class="fk">上課時地</span><span class="fv">電學410/1-567</span></div>
+<div class="fitem"><span class="fk">教學助理</span><span class="fv">高子翔；馮致嘉</span></div>
+<div class="fitem"><span class="fk">辦公室時間</span><span class="fv">星期三 13:00~16:00</span></div>
+<div class="fitem"><span class="fk">課程網址</span><span class="fv">https://ilearning.cycu.edu.tw/</span></div>
+<div class="fitem"><span class="fk">電子郵件</span><span class="fv">swchen@cycu.edu.tw</span></div>
+<div class="fitem"><span class="fk">學術比例</span><span class="fv">30%</span></div>
+<div class="fitem"><span class="fk">實務比例</span><span class="fv">70%</span></div>
+<div class="fitem"><span class="fk">課程類別</span><span class="fv">&lt;實作課程&gt;</span></div>
+<div class="fitem"><span class="fk">SDGs</span><span class="fv">10:促進均等, 4:優質教育, 9:產業創新與基礎建設, 8:全人職場及經濟成長,</span></div>
+</div>
+<div class="sect"><span class="bar"></span><h2>核心能力指標</h2><span class="idx">CORE ABILITIES</span></div>
+<ul class="cs-list"><li>3.1 運用數學、科學及工程知識的能力</li><li>3.2 設計與執行實驗，以及分析與解釋數據的能力</li><li>3.3 執行工程實務所需技術、技巧及使用現代工具的能力</li><li>3.4 設計工程系統、元件或製程的能力</li><li>3.6 發掘、分析、應用研究成果及兼顧永續發展，以解決複雜且整合性工程問題的能力</li><li>3.5 專案管理、有效溝通、領域整合及團隊合作的能力</li></ul>
+<div class="sect"><span class="bar"></span><h2>教學目標</h2><span class="idx">OBJECTIVES</span></div>
+<ul class="cs-goals"><li>藉由數位實驗模組的製作、測試及組合應用，學習實際電路的運作、故障排除與系統整合能力。</li><li>透過實際操作，使學生能將邏輯設計與數位系統相關理論應用於實際電路。</li><li>培養正確的電子實驗操作習慣與實驗室安全觀念。</li></ul>
+<div class="sect"><span class="bar"></span><h2>其他注意事項</h2><span class="idx">NOTES</span></div>
+<p class="cs-p">上課請準時，實驗室內請勿飲食，並請遵守實驗室安全規範。</p>
+<div class="sect"><span class="bar"></span><h2>成果導向之課程設計</h2><span class="idx">OUTCOME-BASED</span></div>
+<div class="oc">
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">專業</span><span class="oc-w">10%</span></div>
+<div class="oc-dept">3.1 運用數學、科學及工程知識的能力</div>
+<ul class="oc-crit"><li>能用所學的專業知識解答相關問題。</li><li>能分析專業科目之間的關聯性。</li><li>能將專業知識融會貫通，統合成完整的知識。</li></ul>
+<div class="oc-assess">評量 <span>出席</span><span>期中考</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">統整</span><span class="oc-w">30%</span></div>
+<div class="oc-dept">3.2 設計與執行實驗，以及分析與解釋數據的能力</div>
+<ul class="oc-crit"><li>能以淺顯易懂的方式理解複雜的事物。</li><li>能從零散或片段的事物中找出共同點。</li><li>能運用所學，形成一套屬於自己的見解。</li><li>能調整心態面對新情境。</li><li>能尋求人際支持，以面對新情境。</li><li>能尋求外在資源，以面對新情境。</li></ul>
+<div class="oc-assess">評量 <span>實驗</span><span>出席</span><span>期中考</span><span>期末專題</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">實務</span><span class="oc-w">20%</span></div>
+<div class="oc-dept">3.3 執行工程實務所需技術、技巧及使用現代工具的能力</div>
+<ul class="oc-crit"><li>能累積從工作或生活中所獲得的新經驗。</li><li>能從工作或生活中獲得新的經驗或體驗。</li><li>能從工作或生活中累積的經驗中再學習。</li></ul>
+<div class="oc-assess">評量 <span>實驗</span><span>期中考</span><span>期末專題</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">統整</span><span class="oc-w">20%</span></div>
+<div class="oc-dept">3.4 設計工程系統、元件或製程的能力</div>
+<ul class="oc-crit"><li>能以淺顯易懂的方式理解複雜的事物。</li><li>能從零散或片段的事物中找出共同點。</li><li>能運用所學，形成一套屬於自己的見解。</li><li>能調整心態面對新情境。</li><li>能尋求人際支持，以面對新情境。</li><li>能尋求外在資源，以面對新情境。</li></ul>
+<div class="oc-assess">評量 <span>實驗</span><span>出席</span><span>期中考</span><span>期末專題</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">創新</span><span class="oc-w">10%</span></div>
+<div class="oc-dept">3.6 發掘、分析、應用研究成果及兼顧永續發展，以解決複雜且整合性工程問題的能力</div>
+<ul class="oc-crit"><li>能提出新的想法或觀念。</li><li>能將自己既有的觀念加上新思維。</li><li>能突破既有的思維或觀念。</li><li>能在所學領域上創造新局面。</li><li>能以提問的方式釐清問題本質。</li><li>能尋找解決問題的方案。</li><li>能分析各種解決問題方案的優、缺點。</li><li>能在所學領域上實際展開行動。</li><li>能在所學領域上發展新方向。</li></ul>
+<div class="oc-assess">評量 <span>實驗</span><span>期末專題</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">溝通</span><span class="oc-w">10%</span></div>
+<div class="oc-dept">3.5 專案管理、有效溝通、領域整合及團隊合作的能力</div>
+<ul class="oc-crit"><li>與他人溝通時，能暸解對方所要傳達的訊息。</li><li>在團體活動中，能明確表達個人意見。。</li><li>與他人交換意見時，彼此都能相互理解。</li><li>與他人交談時，對方能瞭解我所要傳達的訊息。</li></ul>
+<div class="oc-assess">評量 <span>出席</span><span>期末專題</span></div>
+</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>課程綱要及進度</h2><span class="idx">18 WEEKS</span></div>
+<div class="wk">
+<div class="wk-row">
+<div class="wk-n">01</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-14</div>
+<div class="wk-c">實驗室安全宣導、課程介紹、分組；說明課程進度、評分方式及實驗材料</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">02</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-21</div>
+<div class="wk-c">組件介紹、檢查材料、模組焊接；教科書 1-1、1-2、1-3，材料準備 1-6，預習 1-5</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論</span><span><b>評量</b> 問答,實驗,報告</span></div>
+</div></div>
+<div class="wk-row rest">
+<div class="wk-n">03</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-28</div>
+<div class="wk-c">(教師節(放假))</div>
+<div class="wk-t"></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">04</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-05</div>
+<div class="wk-c">LA01：邏輯狀態指示器、LA02：單一脈波產生器；原理說明、模組焊接與功能檢查；應用實驗：2-2 組合邏輯應用實驗-搶先電路</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論</span><span><b>評量</b> 問答,實驗,報告</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">05</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-12</div>
+<div class="wk-c">LA06：二進制計數器；原理說明、模組焊接與功能檢查；應用實驗：2-1 AND &amp; NOR、2-3 J-K 正反器</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論</span><span><b>評量</b> 問答,實驗,報告</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">06</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-19</div>
+<div class="wk-c">LA03：十進制計數器；原理說明、模組焊接與功能檢查；應用實驗：2-6 除18 電路、4-4 任意除 N 除頻電路</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論</span><span><b>評量</b> 問答,實驗,報告</span></div>
+</div></div>
+<div class="wk-row rest">
+<div class="wk-n">07</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-26</div>
+<div class="wk-c">(補假(臺灣光復紀念日))</div>
+<div class="wk-t"></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">08</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-02</div>
+<div class="wk-c">LA05：七段顯示器；原理說明、模組焊接與功能檢查；應用實驗：2-4 D 型正反器之閂鎖現象觀察、2-9 BCD 計數器使用 7490</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論</span><span><b>評量</b> 問答,實驗,報告</span></div>
+</div></div>
+<div class="wk-row rest">
+<div class="wk-n">09</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-09</div>
+<div class="wk-c">(期中考試週)（課程專題問題發想、專題零件及材料準備）LA04：時脈產生器，原理說明，模組</div>
+<div class="wk-t"><span><b>教學法</b> 討論</span><span><b>評量</b> 專題</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">10</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-16</div>
+<div class="wk-c">焊接、功能檢查。應用實驗：2-7 多種方波信號產生器4-2 多級方波產生器</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論</span><span><b>評量</b> 問答,實驗,報告</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">11</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-23</div>
+<div class="wk-c">4-3 簡易電子碼錶期中測驗：筆試＋實作測驗</div>
+<div class="wk-t"><span><b>教學法</b> 期中測驗</span><span><b>評量</b> 筆試、實作測驗</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">12</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-30</div>
+<div class="wk-c">應用實驗：2-8 計數器使用 7490 2-10 對稱除 (10)10</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論</span><span><b>評量</b> 問答,實驗,報告</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">13</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-07</div>
+<div class="wk-c">應用實驗2-5 JK 正反器計數4-9 JK 正反器實驗</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論</span><span><b>評量</b> 問答,實驗,報告</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">14</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-14</div>
+<div class="wk-c">應用實驗：4-6 脈衝計數實驗4-7 上下計數實驗；期末專題說明及主題確認</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論</span><span><b>評量</b> 問答,實驗,報告</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">15</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-21</div>
+<div class="wk-c">期末專題：電路設計、模組組合與系統製作</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論,PBL</span><span><b>評量</b> 問答,實驗,報告,專題</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">16</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-28</div>
+<div class="wk-c">期末專題：系統整合、測試與故障排除；期末專題成品驗收</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論,PBL</span><span><b>評量</b> 問答,實驗,報告,專題</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">17</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-04</div>
+<div class="wk-c">期末專題成品驗收、專題報告繳交</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學:講授,討論,PBL</span><span><b>評量</b> 問答,實驗,報告,專題</span></div>
+</div></div>
+<div class="wk-row rest">
+<div class="wk-n">18</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-11</div>
+<div class="wk-c">(學期考試週)（專題補驗收及專題報告補繳)</div>
+<div class="wk-t"><span><b>教學法</b> PBL</span><span><b>評量</b> 專題</span></div>
+</div></div>
+</div>
+<div class="sect"><span class="bar"></span><h2>考核項目及評量標準</h2><span class="idx">ASSESSMENT</span></div>
+<div class="mbar"><div class="lbl"><span>平時 &amp;middot; 實驗</span><em>20%</em></div><div class="trk"><div class="fill" style="width:20%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>平時 &amp;middot; 出席</span><em>20%</em></div><div class="trk"><div class="fill" style="width:20%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>期中 &amp;middot; 期中考</span><em>25%</em></div><div class="trk"><div class="fill" style="width:25%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>期末 &amp;middot; 期末專題</span><em>35%</em></div><div class="trk"><div class="fill" style="width:35%"></div></div></div>
+<div class="sect"><span class="bar"></span><h2>教科書 / 參考書</h2><span class="idx">TEXTBOOKS</span></div>
+<div class="bk">
+<div class="bk-i"><div class="bk-t">數位模組化創意實驗</div><div class="bk-m">盧明智、許陳鑑、王地河 · 2013 · 新北市土城區: 全華圖書 · ISBN 9789572189 023 · 二版<br><b>教科書</b></div></div>
+</div>
+<a class="cs-link" href="#law" data-goto="law">&#9656; 學則規範 &middot; COURSE RULES</a>
+</section>
+
+<section class="screen" id="c-04" hidden>
+<div class="cs-head">
+<div class="cs-code">C-04 &middot; GE151B</div>
+<h2 class="cs-name">媒體與國際關係</h2>
+<div class="cs-chips"><span>2 學分</span><span>選修</span><span>半學年</span><span>人</span><span>中文</span></div>
+<div class="cs-where">週二 &nbsp;5·6 節 &nbsp;/&nbsp; 13:10–15:00<br>真知教學大樓 教學810 &middot; 林琳文</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>基本資料</h2><span class="idx">COURSE DATA</span></div>
+<div class="fgrid">
+<div class="fitem"><span class="fk">授課教師</span><span class="fv">林琳文</span></div>
+<div class="fitem"><span class="fk">開課班級</span><span class="fv">延伸選修通識</span></div>
+<div class="fitem"><span class="fk">學分</span><span class="fv">2</span></div>
+<div class="fitem"><span class="fk">必選修</span><span class="fv">選修</span></div>
+<div class="fitem"><span class="fk">學年別</span><span class="fv">半學年</span></div>
+<div class="fitem"><span class="fk">性質</span><span class="fv">人</span></div>
+<div class="fitem"><span class="fk">語言</span><span class="fv">中文</span></div>
+<div class="fitem"><span class="fk">人數上限</span><span class="fv">60</span></div>
+<div class="fitem"><span class="fk">開課時數</span><span class="fv">2.0</span></div>
+<div class="fitem"><span class="fk">上課時地</span><span class="fv">教學810/2-56</span></div>
+<div class="fitem"><span class="fk">先修需求</span><span class="fv">無</span></div>
+<div class="fitem"><span class="fk">教學助理</span><span class="fv">王呈鍵</span></div>
+<div class="fitem"><span class="fk">辦公室時間</span><span class="fv">星期二1500-1700</span></div>
+<div class="fitem"><span class="fk">電子郵件</span><span class="fv">lwlin@cycu.edu.tw</span></div>
+<div class="fitem"><span class="fk">學術比例</span><span class="fv">60%</span></div>
+<div class="fitem"><span class="fk">實務比例</span><span class="fv">40%</span></div>
+<div class="fitem"><span class="fk">SDGs</span><span class="fv">10:促進均等, 16:和平正義與健全制度,</span></div>
+</div>
+<div class="sect"><span class="bar"></span><h2>核心能力指標</h2><span class="idx">CORE ABILITIES</span></div>
+<ul class="cs-list"><li>多元思考</li><li>責任倫理</li><li>溝通合作</li><li>社會參與(人類)</li></ul>
+<div class="sect"><span class="bar"></span><h2>教學目標</h2><span class="idx">OBJECTIVES</span></div>
+<p class="cs-p">本課程將藉由案例探討媒體如何呈現、形塑與介入國際關係，帶領學生批判性理解媒體對外交、安全與全球議題的影響，更好地掌握看世界的方法。</p>
+<div class="sect"><span class="bar"></span><h2>成果導向之課程設計</h2><span class="idx">OUTCOME-BASED</span></div>
+<div class="oc">
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">統整</span><span class="oc-w">30%</span></div>
+<div class="oc-dept">多元思考</div>
+<ul class="oc-crit"><li>能以淺顯易懂的方式理解複雜的事物。</li><li>能從零散或片段的事物中找出共同點。</li><li>能運用所學，形成一套屬於自己的見解。</li><li>能尋求外在資源，以面對新情境。</li></ul>
+<div class="oc-assess">評量 <span>出席、問答</span><span>報告</span><span>報告</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">倫理</span><span class="oc-w">30%</span></div>
+<div class="oc-dept">責任倫理</div>
+<ul class="oc-crit"><li>能養成合宜的價值觀。</li><li>能實踐人際間的互動規範。</li><li>能分辨人與人之間的倫常禮儀。</li><li>能自發性地展現合宜的社會規範行為。</li></ul>
+<div class="oc-assess">評量 <span>出席、問答</span><span>報告</span><span>報告</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">溝通</span><span class="oc-w">20%</span></div>
+<div class="oc-dept">溝通合作</div>
+<ul class="oc-crit"><li>與他人溝通時，能暸解對方所要傳達的訊息。</li><li>在團體活動中，能明確表達個人意見。。</li></ul>
+<div class="oc-assess">評量 <span>出席、問答</span><span>報告</span><span>報告</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">熱誠</span><span class="oc-w">20%</span></div>
+<div class="oc-dept">社會參與(人類)</div>
+<ul class="oc-crit"><li>面對壓力時，能適度表達自身的情緒。</li><li>面對壓力時，能以冷靜的態度因應。</li><li>能以積極主動的態度面對壓力。</li></ul>
+<div class="oc-assess">評量 <span>出席、問答</span><span>報告</span><span>報告</span></div>
+</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>課程綱要及進度</h2><span class="idx">18 WEEKS</span></div>
+<div class="wk">
+<div class="wk-row">
+<div class="wk-n">01</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-15</div>
+<div class="wk-c">導論：台灣看世界與世界看台灣</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 出席、問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">02</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-22</div>
+<div class="wk-c">周幽王的烽火台與川普的真實社群：媒體進化與國際關係</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 出席、問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">03</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-29</div>
+<div class="wk-c">世界就是美國？全球權力移轉與媒體的國際關係圖像</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 出席、問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">04</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-06</div>
+<div class="wk-c">中原大學與桃園市政府產業科技高峰論壇</div>
+<div class="wk-t"><span><b>教學法</b> 主題演講</span><span><b>評量</b> 出席(張靜愚紀念圖書館1F秀德廳)</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">05</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-13</div>
+<div class="wk-c">打造國家形象：大外宣與媒體外交</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 出席、問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">06</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-20</div>
+<div class="wk-c">好想贏韓國！國家發展、國族意識與媒體</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 出席、問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">07</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-27</div>
+<div class="wk-c">川普滿天下：媒體與民粹主義的傳播</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 出席、問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">08</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-03</div>
+<div class="wk-c">得TikTok者得天下：地緣政治與媒體</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 出席、問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">09</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-10</div>
+<div class="wk-c">期中考試週</div>
+<div class="wk-t"><span><b>教學法</b> 彈性教學週:自主學習</span><span><b>評量</b> 提交報告題目</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">10</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-17</div>
+<div class="wk-c">他們改變世界了嗎？全球抗議政治與媒體</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 出席、問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">11</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-24</div>
+<div class="wk-c">尋找敵人與視覺化戰爭：戰爭與媒體</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 出席、問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">12</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-01</div>
+<div class="wk-c">誰在製造恐怖？恐怖主義與媒體</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 出席、問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">13</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-08</div>
+<div class="wk-c">道德的界線：國際正義與媒體倫理</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 出席、問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">14</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-15</div>
+<div class="wk-c">謊言與脫歐：後真相時代的國際關係</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 出席、問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">15</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-22</div>
+<div class="wk-c">文化帝國主義與不平等的全球傳播</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 講授、討論、媒體教學</span><span><b>評量</b> 問答、報告</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">16</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-29</div>
+<div class="wk-c">分組報告</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 上台報告、討論</span><span><b>評量</b> 期末報告</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">17</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-05</div>
+<div class="wk-c">分組報告</div>
+<div class="wk-t"><span><b>教學法</b> 一般教學 上台報告、討論</span><span><b>評量</b> 期末報告</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">18</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-12</div>
+<div class="wk-c">學期考試週</div>
+<div class="wk-t"><span><b>教學法</b> 繳交期末報告</span><span><b>評量</b> 期末報告</span></div>
+</div></div>
+</div>
+<div class="sect"><span class="bar"></span><h2>考核項目及評量標準</h2><span class="idx">ASSESSMENT</span></div>
+<div class="mbar"><div class="lbl"><span>平時 &amp;middot; 出席、問答</span><em>20%</em></div><div class="trk"><div class="fill" style="width:20%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>期中 &amp;middot; 報告</span><em>30%</em></div><div class="trk"><div class="fill" style="width:30%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>期末 &amp;middot; 報告</span><em>50%</em></div><div class="trk"><div class="fill" style="width:50%"></div></div></div>
+<div class="sect"><span class="bar"></span><h2>教科書 / 參考書</h2><span class="idx">TEXTBOOKS</span></div>
+<div class="bk">
+<div class="bk-i"><div class="bk-t">國際傳播 : 全球視野與地方策略國際關係總論全球傳播與國際關係</div><div class="bk-m">唐士哲、魏玓張亞中、張登及主編FrederickHo ward · 2014 2023 1999 · 臺北市 : 三民書局發行新北市 : 揚智文化事業股份有限公司臺北市 : 揚智文化 · ISBN 9789571459 073 9789862984 253 9578180152 · 初版第六版初版<br><b>參考書</b></div></div>
+</div>
+<a class="cs-link" href="#law" data-goto="law">&#9656; 學則規範 &middot; COURSE RULES</a>
+</section>
+
+<section class="screen" id="c-05" hidden>
+<div class="cs-head">
+<div class="cs-code">C-05 &middot; GE488F</div>
+<h2 class="cs-name">工程倫理</h2>
+<div class="cs-chips"><span>2 學分</span><span>選修</span><span>半學年</span><span>人</span><span>中文</span></div>
+<div class="cs-where">週四 &nbsp;5·6 節 &nbsp;/&nbsp; 13:10–15:00<br>真知教學大樓 教學112 &middot; 郭泰辰, 鄭琬馨</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>基本資料</h2><span class="idx">COURSE DATA</span></div>
+<div class="fgrid">
+<div class="fitem"><span class="fk">授課教師</span><span class="fv">郭泰辰, 鄭琬馨</span></div>
+<div class="fitem"><span class="fk">開課班級</span><span class="fv">延伸選修通識</span></div>
+<div class="fitem"><span class="fk">學分</span><span class="fv">2</span></div>
+<div class="fitem"><span class="fk">必選修</span><span class="fv">選修電資學院指定通識，電子三甲學生修習為主。The course is required for the students in the College of Electrical</span></div>
+<div class="fitem"><span class="fk">學年別</span><span class="fv">半學年</span></div>
+<div class="fitem"><span class="fk">性質</span><span class="fv">人</span></div>
+<div class="fitem"><span class="fk">語言</span><span class="fv">中文</span></div>
+<div class="fitem"><span class="fk">人數上限</span><span class="fv">60</span></div>
+<div class="fitem"><span class="fk">開課時數</span><span class="fv">2.0</span></div>
+<div class="fitem"><span class="fk">上課時地</span><span class="fv">教學112/4-56</span></div>
+<div class="fitem"><span class="fk">先修需求</span><span class="fv">無</span></div>
+<div class="fitem"><span class="fk">教學助理</span><span class="fv">許堯閔</span></div>
+<div class="fitem"><span class="fk">辦公室時間</span><span class="fv">郭泰辰老師：星期四 09:00-12:00；鄭琬馨老師：星期四 15:00-17:00</span></div>
+<div class="fitem"><span class="fk">電子郵件</span><span class="fv">郭泰辰老師：TCKUO@cycu.edu.tw；鄭琬馨老師：wanhscheng@gmail.com</span></div>
+<div class="fitem"><span class="fk">學術比例</span><span class="fv">30</span></div>
+<div class="fitem"><span class="fk">實務比例</span><span class="fv">70</span></div>
+<div class="fitem"><span class="fk">課程類別</span><span class="fv">&lt;PBL課程&gt;</span></div>
+<div class="fitem"><span class="fk">SDGs</span><span class="fv">7:乾淨能源, 5:性別平等, 4:優質教育, 17:夥伴關係, 13:氣候行動, 12:責任的消費與生產,</span></div>
+<div class="fitem"><span class="fk">選課備註</span><span class="fv">Engineering,primarily for third-year students(3A) in Department of Electronic Engineering.</span></div>
+</div>
+<div class="sect"><span class="bar"></span><h2>核心能力指標</h2><span class="idx">CORE ABILITIES</span></div>
+<ul class="cs-list"><li>多元思考</li><li>責任倫理</li><li>溝通合作</li><li>社會參與(人類)</li></ul>
+<div class="sect"><span class="bar"></span><h2>教學目標</h2><span class="idx">OBJECTIVES</span></div>
+<p class="cs-p">瞭解基本倫理原則以及在專業領域的運用</p>
+<div class="sect"><span class="bar"></span><h2>其他注意事項</h2><span class="idx">NOTES</span></div>
+<p class="cs-p">鄭琬馨老師授課部份成績佔30％，學生需參與課堂討論、繳交指定作業，相關規定會在ilearning上公告。</p>
+<div class="sect"><span class="bar"></span><h2>成果導向之課程設計</h2><span class="idx">OUTCOME-BASED</span></div>
+<div class="oc">
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">統整</span><span class="oc-w">15%</span></div>
+<div class="oc-dept">多元思考</div>
+<ul class="oc-crit"><li>能以淺顯易懂的方式理解複雜的事物。</li><li>能運用所學，形成一套屬於自己的見解。</li><li>能尋求人際支持，以面對新情境。</li></ul>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">倫理</span><span class="oc-w">40%</span></div>
+<div class="oc-dept">責任倫理</div>
+<ul class="oc-crit"><li>能實踐人際間的互動規範。</li><li>能分辨人與人之間的倫常禮儀。</li></ul>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">溝通</span><span class="oc-w">30%</span></div>
+<div class="oc-dept">溝通合作</div>
+<ul class="oc-crit"><li>與他人溝通時，能暸解對方所要傳達的訊息。</li><li>與他人交換意見時，彼此都能相互理解。</li></ul>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">熱誠</span><span class="oc-w">15%</span></div>
+<div class="oc-dept">社會參與(人類)</div>
+<ul class="oc-crit"><li>面對壓力時，能適度表達自身的情緒。</li><li>能以積極主動的態度面對壓力。</li><li>面對壓力時，能適當抒發情緒，以達身心靈和諧。</li></ul>
+</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>課程綱要及進度</h2><span class="idx">18 WEEKS</span></div>
+<div class="wk">
+<div class="wk-row">
+<div class="wk-n">01</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-17</div>
+<div class="wk-c">工程倫理介紹</div>
+<div class="wk-t"><span><b>教學法</b> 講授,討論,PBL</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">02</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-24</div>
+<div class="wk-c">一般倫理：何謂倫理學</div>
+<div class="wk-t"><span><b>教學法</b> 講授,討論</span><span><b>評量</b> 問答,作業</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">03</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-01</div>
+<div class="wk-c">一般倫理：應用倫理學</div>
+<div class="wk-t"><span><b>教學法</b> 講授,討論</span><span><b>評量</b> 問答,作業</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">04</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-08</div>
+<div class="wk-c">一般倫理：專業倫理概論</div>
+<div class="wk-t"><span><b>教學法</b> 講授,討論</span><span><b>評量</b> 問答,作業</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">05</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-15</div>
+<div class="wk-c">一般倫理：趨勢倫理學</div>
+<div class="wk-t"><span><b>教學法</b> 講授,討論,個案研究,PBL</span><span><b>評量</b> 問答,作業</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">06</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-22</div>
+<div class="wk-c">一般倫理：專業倫理經典個案分析、AI應用倫理</div>
+<div class="wk-t"><span><b>教學法</b> 講授,討論,個案研究,PBL</span><span><b>評量</b> 問答,作業</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">07</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-29</div>
+<div class="wk-c">一般倫理：專業倫理經典個案分析、AI應用倫理</div>
+<div class="wk-t"><span><b>教學法</b> 講授,討論,個案研究,PBL</span><span><b>評量</b> 問答,作業</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">08</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-05</div>
+<div class="wk-c">期中考複習</div>
+<div class="wk-t"><span><b>教學法</b> 個別或小組指導</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row rest">
+<div class="wk-n">09</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-12</div>
+<div class="wk-c">(期中考試週)</div>
+<div class="wk-t"><span><b>教學法</b> 期中考</span><span><b>評量</b> 期中考</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">10</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-19</div>
+<div class="wk-c">道德倫理</div>
+<div class="wk-t"><span><b>教學法</b> 講授,討論,PBL</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">11</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-26</div>
+<div class="wk-c">教學倫理</div>
+<div class="wk-t"><span><b>教學法</b> 講授,討論,PBL</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">12</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-03</div>
+<div class="wk-c">從計畫性淘汰探討倫理</div>
+<div class="wk-t"><span><b>教學法</b> 講授,討論,PBL</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">13</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-10</div>
+<div class="wk-c">資訊倫理</div>
+<div class="wk-t"><span><b>教學法</b> 講授,討論,PBL</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">14</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-17</div>
+<div class="wk-c">分組口頭報告</div>
+<div class="wk-t"><span><b>教學法</b> 心得發表</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">15</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-24</div>
+<div class="wk-c">平安感恩日(放假)</div>
+<div class="wk-t"></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">16</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-31</div>
+<div class="wk-c">分組口頭報告</div>
+<div class="wk-t"><span><b>教學法</b> 心得發表</span><span><b>評量</b> 報告</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">17</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-07</div>
+<div class="wk-c">期末考複習</div>
+<div class="wk-t"><span><b>教學法</b> 個別或小組指導</span><span><b>評量</b> 問答</span></div>
+</div></div>
+<div class="wk-row rest">
+<div class="wk-n">18</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-14</div>
+<div class="wk-c">(學期考試週)</div>
+<div class="wk-t"><span><b>教學法</b> 期末報告</span><span><b>評量</b> 報告</span></div>
+</div></div>
+</div>
+<div class="sect"><span class="bar"></span><h2>考核項目及評量標準</h2><span class="idx">ASSESSMENT</span></div>
+<div class="mbar"><div class="lbl"><span>平時 &amp;middot; 平時表現</span><em>10%</em></div><div class="trk"><div class="fill" style="width:10%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>平時 &amp;middot; 作業</span><em>30%</em></div><div class="trk"><div class="fill" style="width:30%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>期末 &amp;middot; 報告</span><em>30%</em></div><div class="trk"><div class="fill" style="width:30%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>期末 &amp;middot; 專題</span><em>20%</em></div><div class="trk"><div class="fill" style="width:20%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>其它 &amp;middot; DIT前測</span><em>5%</em></div><div class="trk"><div class="fill" style="width:5%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>其它 &amp;middot; DIT後測</span><em>5%</em></div><div class="trk"><div class="fill" style="width:5%"></div></div></div>
+<a class="cs-link" href="#law" data-goto="law">&#9656; 學則規範 &middot; COURSE RULES</a>
+</section>
+
+<section class="screen" id="c-06" hidden>
+<div class="cs-head">
+<div class="cs-code">C-06 &middot; EL255G</div>
+<h2 class="cs-name">電子學(三)</h2>
+<div class="cs-chips"><span>3 學分</span><span>選修</span><span>半學年</span><span>一般</span><span>中文</span></div>
+<div class="cs-where">週三 &nbsp;7·8·C 節 &nbsp;/&nbsp; 15:10–17:55<br>真知教學大樓 教學605 &middot; 薛光華</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>基本資料</h2><span class="idx">COURSE DATA</span></div>
+<div class="fgrid">
+<div class="fitem"><span class="fk">授課教師</span><span class="fv">薛光華</span></div>
+<div class="fitem"><span class="fk">開課班級</span><span class="fv">電子三甲</span></div>
+<div class="fitem"><span class="fk">學分</span><span class="fv">3</span></div>
+<div class="fitem"><span class="fk">必選修</span><span class="fv">選修106起入學學生核心選修3選2。2 of 3 core basic elective courses</span></div>
+<div class="fitem"><span class="fk">學年別</span><span class="fv">半學年</span></div>
+<div class="fitem"><span class="fk">性質</span><span class="fv">一般</span></div>
+<div class="fitem"><span class="fk">語言</span><span class="fv">中文</span></div>
+<div class="fitem"><span class="fk">人數上限</span><span class="fv">60</span></div>
+<div class="fitem"><span class="fk">開課時數</span><span class="fv">3.0</span></div>
+<div class="fitem"><span class="fk">上課時地</span><span class="fv">教學605/3-78C</span></div>
+<div class="fitem"><span class="fk">辦公室時間</span><span class="fv">週一與週三...b與5節</span></div>
+<div class="fitem"><span class="fk">電子郵件</span><span class="fv">ghs@cycu.edu.tw</span></div>
+<div class="fitem"><span class="fk">SDGs</span><span class="fv">4:優質教育,</span></div>
+<div class="fitem"><span class="fk">選課備註</span><span class="fv">for students enrolled since 2017.</span></div>
+</div>
+<div class="sect"><span class="bar"></span><h2>核心能力指標</h2><span class="idx">CORE ABILITIES</span></div>
+<ul class="cs-list"><li>3.1 運用數學、科學及工程知識的能力</li><li>3.2 設計與執行實驗，以及分析與解釋數據的能力</li><li>3.3 執行工程實務所需技術、技巧及使用現代工具的能力</li><li>3.4 設計工程系統、元件或製程的能力</li><li>3.6 發掘、分析、應用研究成果及兼顧永續發展，以解決複雜且整合性工程問題的能力</li><li>3.8 理解及應用專業與資訊倫理，認知社會責任及尊重多元觀點</li></ul>
+<div class="sect"><span class="bar"></span><h2>教學目標</h2><span class="idx">OBJECTIVES</span></div>
+<ul class="cs-goals"><li>To review the fundamental circuit theory, diode and transistors.</li><li>To learn the analysis of electronic circuits about OPA, feedback and frequency response.</li></ul>
+<div class="sect"><span class="bar"></span><h2>成果導向之課程設計</h2><span class="idx">OUTCOME-BASED</span></div>
+<div class="oc">
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">專業</span><span class="oc-w">60%</span></div>
+<div class="oc-dept">3.1 運用數學、科學及工程知識的能力</div>
+<ul class="oc-crit"><li>能用所學的專業知識解答相關問題。</li></ul>
+<div class="oc-assess">評量 <span>作業</span><span>測驗</span><span>測驗</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">統整</span><span class="oc-w">5%</span></div>
+<div class="oc-dept">3.2 設計與執行實驗，以及分析與解釋數據的能力</div>
+<ul class="oc-crit"><li>能以淺顯易懂的方式理解複雜的事物。</li></ul>
+<div class="oc-assess">評量 <span>作業</span><span>測驗</span><span>測驗</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">實務</span><span class="oc-w">15%</span></div>
+<div class="oc-dept">3.3 執行工程實務所需技術、技巧及使用現代工具的能力</div>
+<ul class="oc-crit"><li>能累積從工作或生活中所獲得的新經驗。</li></ul>
+<div class="oc-assess">評量 <span>作業</span><span>測驗</span><span>測驗</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">統整</span><span class="oc-w">5%</span></div>
+<div class="oc-dept">3.4 設計工程系統、元件或製程的能力</div>
+<ul class="oc-crit"><li>能以淺顯易懂的方式理解複雜的事物。</li></ul>
+<div class="oc-assess">評量 <span>作業</span><span>測驗</span><span>測驗</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">創新</span><span class="oc-w">10%</span></div>
+<div class="oc-dept">3.6 發掘、分析、應用研究成果及兼顧永續發展，以解決複雜且整合性工程問題的能力</div>
+<ul class="oc-crit"><li>能提出新的想法或觀念。</li></ul>
+<div class="oc-assess">評量 <span>作業</span><span>測驗</span><span>測驗</span></div>
+</div>
+<div class="oc-row">
+<div class="oc-top"><span class="oc-school">倫理</span><span class="oc-w">5%</span></div>
+<div class="oc-dept">3.8 理解及應用專業與資訊倫理，認知社會責任及尊重多元觀點</div>
+<ul class="oc-crit"><li>能養成合宜的價值觀。</li></ul>
+<div class="oc-assess">評量 <span>作業</span><span>測驗</span><span>測驗</span></div>
+</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>課程綱要及進度</h2><span class="idx">18 WEEKS</span></div>
+<div class="wk">
+<div class="wk-row">
+<div class="wk-n">01</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-16</div>
+<div class="wk-c">Introduction to course</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">02</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-23</div>
+<div class="wk-c">BJT,FET</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">03</div>
+<div class="wk-b">
+<div class="wk-d">2026-09-30</div>
+<div class="wk-c">AC model and Analyses</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">04</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-07</div>
+<div class="wk-c">Introduction to FeedBack</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">05</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-14</div>
+<div class="wk-c">Circuit Notes of FB</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">06</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-21</div>
+<div class="wk-c">Series-Series FB circuit</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">07</div>
+<div class="wk-b">
+<div class="wk-d">2026-10-28</div>
+<div class="wk-c">Series-Shunt FB circuit</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">08</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-04</div>
+<div class="wk-c">Test</div>
+<div class="wk-t"></div>
+</div></div>
+<div class="wk-row rest">
+<div class="wk-n">09</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-11</div>
+<div class="wk-c">(期中考週)</div>
+<div class="wk-t"></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">10</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-18</div>
+<div class="wk-c">Shunt-Shunt FB circuit</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">11</div>
+<div class="wk-b">
+<div class="wk-d">2026-11-25</div>
+<div class="wk-c">Shunt-Series FB circuit</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">12</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-02</div>
+<div class="wk-c">Shunt-Series FB circuit</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">13</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-09</div>
+<div class="wk-c">Test</div>
+<div class="wk-t"></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">14</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-16</div>
+<div class="wk-c">OPA1</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">15</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-23</div>
+<div class="wk-c">OPA2</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span><span><b>評量</b> 測驗</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">16</div>
+<div class="wk-b">
+<div class="wk-d">2026-12-30</div>
+<div class="wk-c">Test</div>
+<div class="wk-t"><span><b>評量</b> 測驗</span></div>
+</div></div>
+<div class="wk-row">
+<div class="wk-n">17</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-06</div>
+<div class="wk-c">FR</div>
+<div class="wk-t"><span><b>教學法</b> 講授</span></div>
+</div></div>
+<div class="wk-row rest">
+<div class="wk-n">18</div>
+<div class="wk-b">
+<div class="wk-d">2027-01-13</div>
+<div class="wk-c">(學期考試週)</div>
+<div class="wk-t"></div>
+</div></div>
+</div>
+<div class="sect"><span class="bar"></span><h2>考核項目及評量標準</h2><span class="idx">ASSESSMENT</span></div>
+<div class="mbar"><div class="lbl"><span>平時 &amp;middot; 作業</span><em>28%</em></div><div class="trk"><div class="fill" style="width:28%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>期中 &amp;middot; 測驗</span><em>36%</em></div><div class="trk"><div class="fill" style="width:36%"></div></div></div>
+<div class="mbar"><div class="lbl"><span>期末 &amp;middot; 測驗</span><em>36%</em></div><div class="trk"><div class="fill" style="width:36%"></div></div></div>
+<div class="sect"><span class="bar"></span><h2>教科書 / 參考書</h2><span class="idx">TEXTBOOKS</span></div>
+<div class="bk">
+<div class="bk-i"><div class="bk-t">Microelectronics circuit</div><div class="bk-m">Smith<br><b>教科書</b></div></div>
+</div>
+<a class="cs-link" href="#law" data-goto="law">&#9656; 學則規範 &middot; COURSE RULES</a>
+</section>
+
+<section class="screen" id="law" hidden>
+<div class="cs-head">
+<div class="cs-code">COMMON &middot; 6 門課共用</div>
+<h2 class="cs-name">學則規範</h2>
+<div class="cs-chips"><span>逐字相同</span><span>只列一次</span></div>
+<div class="cs-where">以下條文取自 6 份課程計畫的「學則規範」區塊，內容完全一致。</div>
+</div>
+<div class="sect"><span class="bar"></span><h2>規範條文</h2><span class="idx">RULES</span></div>
+<div class="law-sec">
+<p>一、上課時請勿飲食，請勿穿拖鞋。</p>
+<p><b>二、中原大學學則請假、缺曠課及補考規定</b></p>
+<ul class="cs-list"><li>1.學生因故不能上課時，須按照學生請假規則請假，學生請假規則另訂於中原大學請假規則。(第25條)</li><li>2.學生未經請假、請假未准或假期已滿而不上課者為曠課，請假核准未上課者為缺課。學生缺、曠課或出席依任課教師課程計畫教學大綱規定予以評分。(第26條第1項)</li><li>3.學生因懷孕、曾懷孕（人工流產、自然流產或出養）、分娩或撫育三歲以下子女、配偶或伴侶懷孕、曾懷孕（人工流產、自然流產或出養）、分娩之需要請假獲准，或因遭遇重病、受傷、重大家庭變故之學生並經全人關懷學生委員會認定者，不受前項規範。(第26條第2項)</li><li>4.學生因公、重病、親喪或重大事故等，不能參加期中或學期考試者，應按照規定請假，核准後始准予補考。補考規定及成績計算如下：(1)請假未經核准或曠考者，不准補考。(2)期中考試、學期考試補考者，由教師自行舉行。補考以一次為限，屆時不到者，不得再行補考。(3)補考成績作為期中或學期考試成績，再與其他考試成績按照比率合併計算所得成績，作為該科目之學期成績。(第34條)</li><li>5.學生於任何考試時，如有舞弊行為，一經查覺，除該次考試成績以零分計算外，並視情節輕重予以處分。(第35條第1項)</li></ul>
+<p>詳細學則規範請至以下路徑查詢：本校首頁/行政單位/教務處/課務與註冊組(聯合服務中心)/單位法規。</p>
+</div>
+</section>
+
+      </div><!-- /ph-screens -->
+
+      <nav class="phone-nav" id="pnav" aria-label="切換畫面">
+        <button type="button" class="pnav" data-goto="timetable">課表</button>
+        <button type="button" class="pnav" data-goto="c-01">半導體</button>
+        <button type="button" class="pnav" data-goto="c-02">電磁學</button>
+        <button type="button" class="pnav" data-goto="c-03">實驗</button>
+        <button type="button" class="pnav" data-goto="c-04">媒體</button>
+        <button type="button" class="pnav" data-goto="c-05">倫理</button>
+        <button type="button" class="pnav" data-goto="c-06">電子學</button>
+        <button type="button" class="pnav" data-goto="law">學則</button>
+      </nav>
+
+    </div><!-- /phone -->
+
+    <footer class="rv">
       <div><span class="z">1151</span> &copy; <span id="yy">2026</span> &middot; 功課表</div>
       <div class="links">
-        <span>來源：kebiao 11501.jsp (PDF)</span>
+        <span>來源：課程計畫 PDF &middot; kebiao 11501.jsp</span>
         <span class="hint">[T] CYCLE THEME</span>
       </div>
     </footer>
@@ -772,7 +2180,7 @@ const PERIODS = [
 const DAYS = ['週一','週二','週三','週四','週五','週六','週日'];
 
 const COURSES = [
-  { id:'C-01', name:'數位系統',       day:3, start:2, span:3, room:'教學705', bldg:'真知教學大樓' },
+  { id:'C-01', name:'基礎半導體物理與元件(一)', day:3, start:2, span:3, room:'教學608', bldg:'真知教學大樓' },
   { id:'C-02', name:'電磁學(一)',     day:4, start:3, span:3, room:'教學605', bldg:'真知教學大樓' },
   { id:'C-03', name:'電子系統實驗',   day:0, start:6, span:3, room:'電學410', bldg:'電學大樓' },
   { id:'C-04', name:'媒體與國際關係', day:1, start:6, span:2, room:'教學810', bldg:'真知教學大樓' },
@@ -793,6 +2201,8 @@ function periodList(start, span){
   for(let i=start;i<start+span;i++) out.push(PERIODS[i].c);
   return out.join('·');
 }
+/* C-01 → c-01：課程畫面 id */
+function screenOf(c){ return 'c-' + c.id.slice(2).toLowerCase(); }
 
 /* ============================================================
    ENV
@@ -989,6 +2399,8 @@ function todayPeriodIndex(){
     el.style.gridColumn = String(c.day + 2);
     el.style.gridRow = (c.start + 2) + ' / span ' + c.span;
     el.setAttribute('tabindex','0');
+    el.setAttribute('data-goto', screenOf(c));
+    el.setAttribute('aria-label', c.name + ' — 查看課程計畫');
     el.title = c.name + ' · ' + DAYS[c.day] + ' ' + periodRange(c.start, c.span) + ' · ' + c.bldg + ' ' + c.room;
     el.innerHTML =
         '<span class="cn">' + c.id + (isNow ? ' · NOW' : '') + '</span>'
@@ -1023,6 +2435,8 @@ function todayPeriodIndex(){
     el.className = 'card';
     el.setAttribute('tabindex','0');
     el.setAttribute('role','listitem');
+    el.setAttribute('data-goto', screenOf(c));
+    el.setAttribute('aria-label', c.name + ' — 查看課程計畫');
     el.innerHTML =
         '<div class="ch"><span class="cnum">NODE ' + c.id + '</span><span class="cday">' + DAYS[c.day] + '</span></div>'
       + '<div class="cname">' + c.name + '</div>'
@@ -1030,7 +2444,8 @@ function todayPeriodIndex(){
       + '<div class="mbar"><div class="lbl"><span>每週節數</span><em>' + c.span + ' 節</em></div>'
       +   '<div class="trk"><div class="fill" data-w="' + Math.round(c.span/MAXSPAN*100) + '"></div></div></div>'
       + '<div class="cmeta"><span>地點 <b>' + c.bldg + ' ' + c.room + '</b></span>'
-      +   '<span>節次 <b>' + periodList(c.start, c.span) + '</b></span></div>';
+      +   '<span>節次 <b>' + periodList(c.start, c.span) + '</b></span></div>'
+      + '<div class="cx">&#9656; 課程計畫</div>';
     box.appendChild(el);
   });
   if('IntersectionObserver' in window){
@@ -1078,7 +2493,7 @@ function todayPeriodIndex(){
   function start(){ if(!anim){ anim = true; raf = requestAnimationFrame(loop); } }
   function onWheel(e){
     if(e.ctrlKey) return;
-    if(e.target && e.target.closest && e.target.closest('.ttscroll')) return;
+    if(e.target && e.target.closest && e.target.closest('.phone')) return;
     e.preventDefault();
     target = Math.max(0, Math.min(maxScroll(), target + e.deltaY));
     start();
@@ -1477,6 +2892,71 @@ $('bootSkip').addEventListener('click', function(ev){ ev.stopPropagation(); fini
     if(p>=100){ clearInterval(iv); finishBoot(); }
   }, 36);
   typeWriter('1151 學年期 · 功課表', function(s){ bootLine.textContent=s; });
+})();
+
+/* ============================================================
+   SCREENS — 手機畫面切換（課表 / 各課程計畫 / 學則）
+   ============================================================ */
+const SCREENS = Array.prototype.slice.call(document.querySelectorAll('.screen'));
+const PNAV = Array.prototype.slice.call(document.querySelectorAll('.pnav'));
+function screenById(id){ return document.getElementById(id); }
+
+/* 畫面顯示時一次點亮裡面的 .rv：內容在內層捲動容器裡，
+   以視窗為根的 IntersectionObserver 看不到捲出可視範圍的元素。 */
+function lightUp(root){
+  if(!root) return;
+  Array.prototype.forEach.call(root.querySelectorAll('.rv'), function(n){
+    n.classList.add('in');
+    if(io) io.unobserve(n);
+  });
+}
+function showScreen(id, opts){
+  const el = screenById(id) || screenById('timetable');
+  if(!el) return;
+  SCREENS.forEach(function(s){ s.hidden = (s !== el); });
+  PNAV.forEach(function(b){ b.setAttribute('aria-current', String(b.dataset.goto === el.id)); });
+  lightUp(el);
+  el.scrollTop = 0;
+  const chip = PNAV.filter(function(b){ return b.dataset.goto === el.id; })[0];
+  if(chip && chip.scrollIntoView){
+    chip.scrollIntoView({inline:'center', block:'nearest', behavior: REDUCED ? 'auto' : 'smooth'});
+  }
+  if(!(opts && opts.silent)) AudioFX.blip();
+}
+function goto(id, silent){
+  if(!screenById(id)) return;
+  try{ history.pushState({s:id}, '', '#' + id); }catch(e){ location.hash = id; }
+  showScreen(id, {silent:silent});
+}
+document.addEventListener('click', function(e){
+  const t = e.target && e.target.closest ? e.target.closest('[data-goto]') : null;
+  if(!t) return;
+  e.preventDefault();
+  goto(t.dataset.goto);
+});
+document.addEventListener('keydown', function(e){
+  if(e.key !== 'Enter' && e.key !== ' ') return;
+  const t = e.target && e.target.closest ? e.target.closest('[data-goto]') : null;
+  if(!t || t.tagName === 'BUTTON') return;      /* 按鈕原生就會觸發 click */
+  e.preventDefault();
+  goto(t.dataset.goto);
+});
+function syncFromHash(){
+  const id = (location.hash || '').replace(/^#/, '');
+  showScreen(screenById(id) ? id : 'timetable', {silent:true});
+}
+window.addEventListener('popstate', syncFromHash);
+window.addEventListener('hashchange', syncFromHash);
+syncFromHash();
+
+(function phoneClock(){
+  const el = $('phClock'); if(!el) return;
+  function tick(){
+    const d = new Date();
+    el.textContent = ('0'+d.getHours()).slice(-2) + ':' + ('0'+d.getMinutes()).slice(-2);
+  }
+  tick();
+  setInterval(tick, 20000);
 })();
 
 /* ============================================================
